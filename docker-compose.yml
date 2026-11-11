@@ -44,13 +44,15 @@ services:
     ports:
       - "${ADMINER_PORT:-8080}:8080"
 
-  # --- Ajoutez votre front ici (propre à chaque fork), par exemple :
-  # frontend:
-  #   build: ./frontend
-  #   ports:
-  #     - "5173:5173"
-  #   depends_on:
-  #     - backend
+  frontend:
+    build: ./frontend
+    depends_on:
+      - backend
+    ports:
+      - "${FRONTEND_PORT:-5173}:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
 
 volumes:
   pgdata:
